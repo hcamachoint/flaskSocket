@@ -4,7 +4,7 @@ from flask_socketio import SocketIO, ConnectionRefusedError, emit
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
-allow_origin_list = ['https://localhost', 'http://localhost', '127.0.0.1']
+allow_origin_list = ['https://localhost', 'http://localhost', '127.0.0.1', 'http://localhost:5000']
 
 @app.route('/')
 def index():
@@ -29,6 +29,7 @@ def test_message(message):
 
 @socketio.on('connect')
 def test_connect():
+    print(request.environ['HTTP_ORIGIN'])
     if request.environ['REMOTE_ADDR'] in allow_origin_list:
         print('Client connected')
         emit('my response', {'data': 'Connected'})
