@@ -13,7 +13,12 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
-      var socket = io();
+      var socket = io("http://localhost:5000", {
+        auth: {
+          "X-My-Auth": "110168078"
+        }
+      });
+      
       socket.on('my response', function(msg) {
             console.log(msg)
         });
